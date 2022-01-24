@@ -6,7 +6,15 @@
         public string Title { get; set; } = string.Empty;
 
         public TimeSpan Duration { get; set; }
-        public TimeOnly StartingTime { get; set; }
+
+        public TimeOnly StartingTime
+        {
+            get => TimeOnly.Parse(StartingTimeDB);
+            set => StartingTimeDB = value.ToString();
+        }
+
+        public string StartingTimeDB { set; get; } = string.Empty;
+
         public TimeOnly EndingTime { get => StartingTime.AddHours(Duration.TotalHours); }
 
         public DateOnly StartingDate
@@ -24,6 +32,6 @@
         }
 
         public string EndingDateDB { set; get; } = string.Empty;
-        public List<DayOfWeek> DayOfWeek { get; set; } = new();
+        public List<DoW> DayOfWeek { get; set; } = new();
     }
 }
