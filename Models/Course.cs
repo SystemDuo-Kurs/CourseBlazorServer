@@ -33,5 +33,8 @@
 
         public string EndingDateDB { set; get; } = string.Empty;
         public List<DoW> DayOfWeek { get; set; } = new();
+
+        public Teacher? Teacher { get; set; }
+        public List<Student> Students { get; set; } = new();
     }
 }

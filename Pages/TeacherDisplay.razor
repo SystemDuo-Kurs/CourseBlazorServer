@@ -1,0 +1,50 @@
+﻿@page "/teachers"
+@inject ViewModels.ITeacherList TeacherList
+@inject ViewModels.IEditTeacher EditTeacher
+
+<MudTable Items="TeacherList.Teachers" T="Models.Teacher">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Surname</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Phone</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@context.Name</MudTd>
+        <MudTd DataLabel="Sign">@context.Surname</MudTd>
+        <MudTd DataLabel="Name">@context.Email</MudTd>
+        <MudTd DataLabel="Position">@context.Phone</MudTd>
+    </RowTemplate>
+</MudTable>
+
+<MudForm Model="EditTeacher.Teacher">
+    <MudTextField
+        T="string" 
+        Label="Name"
+        @bind-Value="EditTeacher.Teacher.Name"
+     />
+     <MudTextField 
+        T="string" 
+        Label="Surname"
+        @bind-Value="EditTeacher.Teacher.Surname"
+     />
+     <MudTextField 
+        T="string" 
+        Label="Email"
+        @bind-Value="EditTeacher.Teacher.Email"
+     />
+     <MudTextField 
+        T="string" 
+        Label="Phone"
+        @bind-Value="EditTeacher.Teacher.Phone"
+     />
+    <MudButton @OnClick="Update()" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
+</MudForm>   
+
+@code {
+    public void Update()
+    {
+        EditTeacher.SaveTeacher();
+        TeacherList.GetTeachers();
+    }
+}

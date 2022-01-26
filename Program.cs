@@ -1,11 +1,14 @@
 using CourseManagement.Areas.Identity;
 using CourseManagement.Data;
+using CourseManagement.Services;
+using CourseManagement.ViewModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+builder.Services.AddMudServices();
+
+builder.Services.AddTransient<ITeacherService, TeacherService>();
+builder.Services.AddTransient<ITeacherList, TeacherList>();
+builder.Services.AddTransient<IEditTeacher, EditTeacher>();
 
 var app = builder.Build();
 

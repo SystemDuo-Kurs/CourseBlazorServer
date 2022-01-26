@@ -13,10 +13,15 @@ namespace CourseManagement.Data
 
         public DbSet<Course> Courses;
         public DbSet<DoW> Dows;
+        public DbSet<Teacher> Teachers;
+        public DbSet<Student> Students;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Teacher>().HasKey(t => t.Id);
+            builder.Entity<Student>().HasKey(s => s.Id);
 
             builder.Entity<DoW>().HasKey(d => d.Id);
 
@@ -26,6 +31,10 @@ namespace CourseManagement.Data
             builder.Entity<Course>().Ignore(c => c.StartingTime);
             builder.Entity<Course>().HasMany(c => c.DayOfWeek)
                 .WithMany(d => d.Courses);
+            builder.Entity<Course>().HasMany(c => c.Students)
+                .WithMany(s => s.Courses);
+            builder.Entity<Course>().HasOne(c => c.Teacher)
+                .WithMany(t => t.Courses);
 
             builder.Entity<DoW>().HasData
             (
