@@ -25,7 +25,9 @@ builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuth
 builder.Services.AddMudServices();
 
 builder.Services.AddTransient<ITeacherService, TeacherService>();
+builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddTransient<ITeacherList, TeacherList>();
+builder.Services.AddTransient<IStudentList, StudentList>();
 builder.Services.AddTransient<IEditTeacher, EditTeacher>();
 
 var app = builder.Build();
