@@ -38,13 +38,14 @@
         Label="Phone"
         @bind-Value="EditTeacher.Teacher.Phone"
      />
-    <MudButton @OnClick="Update()" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
+    <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
 </MudForm>   
 
 @code {
     public void Update()
     {
         EditTeacher.SaveTeacher();
+        EditTeacher.Teacher = new Models.Teacher();
         TeacherList.GetTeachers();
     }
 }

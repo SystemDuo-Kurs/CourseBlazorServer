@@ -11,10 +11,10 @@ namespace CourseManagement.Data
         {
         }
 
-        public DbSet<Course> Courses;
-        public DbSet<DoW> Dows;
-        public DbSet<Teacher> Teachers;
-        public DbSet<Student> Students;
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<DoW> Dows { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

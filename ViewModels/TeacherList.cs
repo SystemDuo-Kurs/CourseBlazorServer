@@ -5,14 +5,14 @@ namespace CourseManagement.ViewModels
 {
     public interface ITeacherList
     {
-        List<Teacher> Teachers { get; }
+        List<Teacher> Teachers { get; set; }
 
         void GetTeachers();
     }
 
     public class TeacherList : ITeacherList
     {
-        public List<Teacher> Teachers { get; private set; } = new();
+        public List<Teacher> Teachers { get; set; } = new();
         private ITeacherService TeacherService { get; init; }
 
         public TeacherList(ITeacherService teacherService)
