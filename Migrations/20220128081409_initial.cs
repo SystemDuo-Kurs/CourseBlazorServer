@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CourseManagement.Migrations
 {
-    public partial class changes : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,7 @@ namespace CourseManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DoW",
+                name: "Dows",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -58,11 +58,11 @@ namespace CourseManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DoW", x => x.Id);
+                    table.PrimaryKey("PK_Dows", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Student",
+                name: "Students",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -74,11 +74,11 @@ namespace CourseManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Student", x => x.Id);
+                    table.PrimaryKey("PK_Students", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teacher",
+                name: "Teachers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -90,7 +90,7 @@ namespace CourseManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teacher", x => x.Id);
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,7 +200,7 @@ namespace CourseManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Course",
+                name: "Courses",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -213,11 +213,11 @@ namespace CourseManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Course", x => x.Id);
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Course_Teacher_TeacherId",
+                        name: "FK_Courses_Teachers_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Teacher",
+                        principalTable: "Teachers",
                         principalColumn: "Id");
                 });
 
@@ -232,15 +232,15 @@ namespace CourseManagement.Migrations
                 {
                     table.PrimaryKey("PK_CourseDoW", x => new { x.CoursesId, x.DayOfWeekId });
                     table.ForeignKey(
-                        name: "FK_CourseDoW_Course_CoursesId",
+                        name: "FK_CourseDoW_Courses_CoursesId",
                         column: x => x.CoursesId,
-                        principalTable: "Course",
+                        principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseDoW_DoW_DayOfWeekId",
+                        name: "FK_CourseDoW_Dows_DayOfWeekId",
                         column: x => x.DayOfWeekId,
-                        principalTable: "DoW",
+                        principalTable: "Dows",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -256,21 +256,21 @@ namespace CourseManagement.Migrations
                 {
                     table.PrimaryKey("PK_CourseStudent", x => new { x.CoursesId, x.StudentsId });
                     table.ForeignKey(
-                        name: "FK_CourseStudent_Course_CoursesId",
+                        name: "FK_CourseStudent_Courses_CoursesId",
                         column: x => x.CoursesId,
-                        principalTable: "Course",
+                        principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseStudent_Student_StudentsId",
+                        name: "FK_CourseStudent_Students_StudentsId",
                         column: x => x.StudentsId,
-                        principalTable: "Student",
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "DoW",
+                table: "Dows",
                 columns: new[] { "Id", "DayOfWeek" },
                 values: new object[,]
                 {
@@ -323,14 +323,14 @@ namespace CourseManagement.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Course_TeacherId",
-                table: "Course",
-                column: "TeacherId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CourseDoW_DayOfWeekId",
                 table: "CourseDoW",
                 column: "DayOfWeekId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_TeacherId",
+                table: "Courses",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseStudent_StudentsId",
@@ -368,16 +368,16 @@ namespace CourseManagement.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "DoW");
+                name: "Dows");
 
             migrationBuilder.DropTable(
-                name: "Course");
+                name: "Courses");
 
             migrationBuilder.DropTable(
-                name: "Student");
+                name: "Students");
 
             migrationBuilder.DropTable(
-                name: "Teacher");
+                name: "Teachers");
         }
     }
 }

@@ -7,7 +7,9 @@ namespace CourseManagement.Services
     {
         List<Student> GetAllStudents();
 
-        void UpdateStudent(Student s);
+        void UpdateStudent(Student student);
+
+        void DeleteStudent(Student student);
     }
 
     public class StudentService : IStudentService
@@ -22,9 +24,15 @@ namespace CourseManagement.Services
         public List<Student> GetAllStudents()
             => Db.Students.ToList();
 
-        public void UpdateStudent(Student s)
+        public void UpdateStudent(Student student)
         {
-            Db.Update(s);
+            Db.Update(student);
+            Db.SaveChanges();
+        }
+
+        public void DeleteStudent(Student student)
+        {
+            Db.Remove(student);
             Db.SaveChanges();
         }
     }

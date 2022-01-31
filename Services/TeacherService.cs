@@ -8,6 +8,8 @@ namespace CourseManagement.Services
         List<Teacher> GetTeachers();
 
         void UpdateTeacher(Teacher teacher);
+
+        void DeleteTeacher(Teacher teacher);
     }
 
     public class TeacherService : ITeacherService
@@ -27,7 +29,13 @@ namespace CourseManagement.Services
 
         public void UpdateTeacher(Teacher teacher)
         {
-            Db.Teachers.Update(teacher);
+            Db.Update(teacher);
+            Db.SaveChanges();
+        }
+
+        public void DeleteTeacher(Teacher teacher)
+        {
+            Db.Remove(teacher);
             Db.SaveChanges();
         }
     }

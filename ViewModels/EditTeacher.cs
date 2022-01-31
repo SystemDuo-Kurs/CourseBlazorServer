@@ -8,6 +8,8 @@ namespace CourseManagement.ViewModels
         Teacher Teacher { get; set; }
 
         void SaveTeacher();
+
+        void DeleteTeacher(Teacher teacher);
     }
 
     public class EditTeacher : IEditTeacher
@@ -21,5 +23,7 @@ namespace CourseManagement.ViewModels
         }
 
         public void SaveTeacher() => TeacherService.UpdateTeacher(Teacher);
+
+        public void DeleteTeacher(Teacher teacher) => TeacherService.DeleteTeacher(teacher);
     }
 }

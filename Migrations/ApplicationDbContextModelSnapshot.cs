@@ -68,7 +68,7 @@ namespace CourseManagement.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("CourseManagement.Models.DoW", b =>
@@ -84,7 +84,7 @@ namespace CourseManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DoW");
+                    b.ToTable("Dows");
 
                     b.HasData(
                         new
@@ -150,7 +150,7 @@ namespace CourseManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("CourseManagement.Models.Teacher", b =>
@@ -179,7 +179,7 @@ namespace CourseManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("CourseStudent", b =>

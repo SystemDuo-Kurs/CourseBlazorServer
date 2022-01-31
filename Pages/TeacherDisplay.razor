@@ -1,4 +1,5 @@
 ﻿@page "/teachers"
+@using Models
 @inject ViewModels.ITeacherList TeacherList
 @inject ViewModels.IEditTeacher EditTeacher
 
@@ -8,12 +9,17 @@
         <MudTh>Surname</MudTh>
         <MudTh>Email</MudTh>
         <MudTh>Phone</MudTh>
+        <MudTh>Edit</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Nr">@context.Name</MudTd>
         <MudTd DataLabel="Sign">@context.Surname</MudTd>
         <MudTd DataLabel="Name">@context.Email</MudTd>
         <MudTd DataLabel="Position">@context.Phone</MudTd>
+        <MudTd>
+            <MudIconButton @onclick="() => Delete(context)" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" />
+            <MudIconButton @onclick="() => Edit(context)" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Success" Size="Size.Medium"> </MudIconButton>
+        </MudTd>
     </RowTemplate>
 </MudTable>
 
@@ -46,6 +52,22 @@
     {
         EditTeacher.SaveTeacher();
         EditTeacher.Teacher = new Models.Teacher();
-        TeacherList.GetTeachers();
+        TeacherList.GetAllTeachers();
+    }
+
+    public void Edit(Teacher teacher)
+    {
+        EditTeacher.Teacher = teacher;
+        TeacherList.GetAllTeachers();
+        StateHasChanged();
+    }
+
+    public void Delete(Teacher teacher)
+    {
+        EditTeacher.DeleteTeacher(teacher);
+        TeacherList.GetAllTeachers();
+        EditTeacher.Teacher = new();
+        StateHasChanged();
     }
 }
+

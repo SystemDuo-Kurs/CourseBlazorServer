@@ -29,6 +29,7 @@ builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddTransient<ITeacherList, TeacherList>();
 builder.Services.AddTransient<IStudentList, StudentList>();
 builder.Services.AddTransient<IEditTeacher, EditTeacher>();
+builder.Services.AddTransient<IEditStudent, EditStudent>();
 
 var app = builder.Build();
 

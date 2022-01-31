@@ -7,7 +7,7 @@ namespace CourseManagement.ViewModels
     {
         List<Teacher> Teachers { get; set; }
 
-        void GetTeachers();
+        void GetAllTeachers();
     }
 
     public class TeacherList : ITeacherList
@@ -18,9 +18,9 @@ namespace CourseManagement.ViewModels
         public TeacherList(ITeacherService teacherService)
         {
             TeacherService = teacherService;
-            GetTeachers();
+            GetAllTeachers();
         }
 
-        public void GetTeachers() => Teachers = TeacherService.GetTeachers();
+        public void GetAllTeachers() => Teachers = TeacherService.GetTeachers();
     }
 }

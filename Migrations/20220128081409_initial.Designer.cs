@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220126082310_changes")]
-    partial class changes
+    [Migration("20220128081409_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,7 @@ namespace CourseManagement.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("CourseManagement.Models.DoW", b =>
@@ -86,7 +86,7 @@ namespace CourseManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DoW");
+                    b.ToTable("Dows");
 
                     b.HasData(
                         new
@@ -152,7 +152,7 @@ namespace CourseManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("CourseManagement.Models.Teacher", b =>
@@ -181,7 +181,7 @@ namespace CourseManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("CourseStudent", b =>

@@ -12,12 +12,13 @@ namespace CourseManagement.ViewModels
 
     public class StudentList : IStudentList
     {
-        public List<Student> Students { get; private set; }
+        public List<Student> Students { get; private set; } = new();
         private IStudentService StudentService { init; get; }
 
         public StudentList(IStudentService studentService)
         {
             StudentService = studentService;
+            GetAllStudents();
         }
 
         public void GetAllStudents()

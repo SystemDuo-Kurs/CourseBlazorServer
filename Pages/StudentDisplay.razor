@@ -1,3 +1,74 @@
 ﻿@page "/students"
-@inject ViewModels.IStudentList
+@using Models
+@inject ViewModels.IStudentList StudentList
+@inject ViewModels.IEditStudent EditStudent
+
+
+<MudTable Items="StudentList.Students" T="Models.Student">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Surname</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Phone</MudTh>
+        <MudTh>Edit</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@context.Name</MudTd>
+        <MudTd DataLabel="Sign">@context.Surname</MudTd>
+        <MudTd DataLabel="Name">@context.Email</MudTd>
+        <MudTd DataLabel="Position">@context.Phone</MudTd>
+        <MudTd>
+            <MudIconButton @onclick="() => Delete(context)" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" />
+            <MudIconButton @onclick="() => Edit(context)" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Success" Size="Size.Medium"> </MudIconButton>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+<MudForm Model="EditStudent.Student">
+    <MudTextField
+        T="string" 
+        Label="Name"
+        @bind-Value="EditStudent.Student.Name"
+     />
+     <MudTextField 
+        T="string" 
+        Label="Surname"
+        @bind-Value="EditStudent.Student.Surname"
+     />
+     <MudTextField 
+        T="string" 
+        Label="Email"
+        @bind-Value="EditStudent.Student.Email"
+     />
+     <MudTextField 
+        T="string" 
+        Label="Phone"
+        @bind-Value="EditStudent.Student.Phone"
+     />
+    <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
+</MudForm>   
+
+@code {
+    public void Update()
+    {
+        EditStudent.SaveStudent();
+        EditStudent.Student = new Models.Student();
+        StudentList.GetAllStudents();
+    }
+
+    public void Edit(Student student)
+    {
+        EditStudent.Student = student;
+        StudentList.GetAllStudents();
+        StateHasChanged();
+    }
+
+    public void Delete(Student student)
+    {
+        EditStudent.DeleteStudent(student);
+        StudentList.GetAllStudents();
+        EditStudent.Student = new();
+        StateHasChanged();
+    }
+}
 
