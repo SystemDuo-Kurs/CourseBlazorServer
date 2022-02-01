@@ -5,7 +5,7 @@
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Title { get; set; } = string.Empty;
 
-        public TimeSpan Duration { get; set; }
+        public TimeSpan? Duration { get; set; }
 
         public TimeOnly StartingTime
         {
@@ -15,7 +15,7 @@
 
         public TimeSpan StartingTimeDb { set; get; }
 
-        public TimeOnly EndingTime => StartingTime.AddHours(Duration.TotalHours);
+        public TimeOnly EndingTime => StartingTime.AddHours(Duration!.Value.TotalHours);
 
         public DateOnly? StartingDate
         {

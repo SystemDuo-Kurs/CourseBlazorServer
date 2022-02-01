@@ -24,10 +24,15 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 builder.Services.AddMudServices();
 
+builder.Services.AddTransient<ICourseService, CourseService>();
 builder.Services.AddTransient<ITeacherService, TeacherService>();
 builder.Services.AddTransient<IStudentService, StudentService>();
+
+builder.Services.AddTransient<ICourseList, CourseList>();
 builder.Services.AddTransient<ITeacherList, TeacherList>();
 builder.Services.AddTransient<IStudentList, StudentList>();
+
+builder.Services.AddTransient<IEditCourse, EditCourse>();
 builder.Services.AddTransient<IEditTeacher, EditTeacher>();
 builder.Services.AddTransient<IEditStudent, EditStudent>();
 
