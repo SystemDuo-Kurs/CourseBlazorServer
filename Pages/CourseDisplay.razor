@@ -3,41 +3,46 @@
 @inject ViewModels.ICourseList CourseList
 @inject ViewModels.IEditCourse EditCourse
 
-<MudTable Items="CourseList.Courses" T="Models.Course">
-    <HeaderContent>
-        <MudTh>Title</MudTh>
-        <MudTh>Duration</MudTh>
-        <MudTh>Starting Time</MudTh>
-        <MudTh>Ending Time</MudTh>
-        <MudTh>Starting Date</MudTh>
-        <MudTh>Ending Date</MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="Nr">@context.Title</MudTd>
-        <MudTd DataLabel="Sign">@context.Duration</MudTd>
-        <MudTd DataLabel="Name">@context.StartingTime</MudTd>
-        <MudTd DataLabel="Position">@context.EndingTime</MudTd>
-        <MudTd DataLabel="Position">@context.StartingDate</MudTd>
-        <MudTd DataLabel="Position">@context.EndingDate</MudTd>
-        <MudTd>
-            <MudIconButton @onclick="() => Delete(context)" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" />
-            <MudIconButton @onclick="() => Edit(context)" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Success" Size="Size.Medium"> </MudIconButton>
-        </MudTd>
-    </RowTemplate>
-</MudTable>
-
-<MudForm Model="EditCourse.Course">
-    <MudTextField
-        T="string" 
-        Label="Name"
-        @bind-Value="EditCourse.Course.Title"
-     />
-     <MudTimePicker 
-        Label="Class Duration" 
-        @bind-Time="EditCourse.Course.Duration" 
-     />
-    <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
-</MudForm>   
+<MudContainer MaxWidth="MaxWidth.Medium">   
+    <MudPaper Class="my-lh-1">
+        <MudTable Elevation="1" Items="CourseList.Courses" T="Models.Course">
+            <HeaderContent>
+                <MudTh>Title</MudTh>
+                <MudTh>Duration</MudTh>
+                <MudTh>Starting Time</MudTh>
+                <MudTh>Ending Time</MudTh>
+                <MudTh>Starting Date</MudTh>
+                <MudTh>Ending Date</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Nr">@context.Title</MudTd>
+                <MudTd DataLabel="Sign">@context.Duration</MudTd>
+                <MudTd DataLabel="Name">@context.StartingTime</MudTd>
+                <MudTd DataLabel="Position">@context.EndingTime</MudTd>
+                <MudTd DataLabel="Position">@context.StartingDate</MudTd>
+                <MudTd DataLabel="Position">@context.EndingDate</MudTd>
+                <MudTd>
+                    <MudIconButton @onclick="() => Delete(context)" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" />
+                    <MudIconButton @onclick="() => Edit(context)" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Success" Size="Size.Medium"> </MudIconButton>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudPaper>
+    <MudPaper Class="my-1" Elevation="1" Outlined="false">
+        <MudForm Model="EditCourse.Course">
+            <MudTextField
+                T="string" 
+                Label="Name"
+                @bind-Value="EditCourse.Course.Title"
+                />
+                <MudTimePicker 
+                Label="Class Duration" 
+                @bind-Time="EditCourse.Course.Duration" 
+                />
+            <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
+        </MudForm>
+    </MudPaper> 
+</MudContainer>  
 
 @code {
     public void Update()
